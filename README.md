@@ -9,7 +9,11 @@
 
 ## Instalação rápida
 
-1. Entre na pasta `backend`.
+1. Clone o repositório:
+   ```bash
+   git clone <url-do-repositorio>
+   cd SistemaDeChamados-PHP-elan
+   ```
 
 2. Instale as dependências do Laravel:
    ```bash
@@ -18,7 +22,11 @@
 
 3. Crie o arquivo de ambiente:
    ```powershell
-   if (!(Test-Path .env)) { Copy-Item .env.example .env }
+   # Windows PowerShell
+   copy .env.example .env
+   
+   # Linux/Mac
+   cp .env.example .env
    ```
 
 4. Gere a chave da aplicação:
@@ -26,12 +34,21 @@
    php artisan key:generate
    ```
 
-5. Execute as migrations:
-   ```bash
-   php artisan migrate
+5. Crie o banco de dados SQLite:
+   ```powershell
+   # Windows PowerShell
+   New-Item database\database.sqlite
+   
+   # Linux/Mac
+   touch database/database.sqlite
    ```
 
-6. Instale as dependências do frontend:
+6. Execute as migrations e seeders:
+   ```bash
+   php artisan migrate --seed
+   ```
+
+7. Instale as dependências do frontend:
    ```bash
    npm install
    ```
@@ -52,16 +69,14 @@ npm run dev
 
 Acesse: `http://127.0.0.1:8000`
 
-## Criar usuário administrador
+## Credenciais de acesso
 
-```bash
-php artisan tinker --execute="App\\Models\\User::updateOrCreate(['email' => 'admin@admin.com'], ['name' => 'Administrador', 'password' => 'admin123', 'role' => 'ADMIN', 'department' => 'TI', 'active' => true]);"
-```
+O comando `php artisan migrate --seed` já cria automaticamente um usuário administrador.
 
-Credenciais padrão:
+**Credenciais padrão:**
 
 - Email: `admin@admin.com`
-- Senha: `admin123`
+- Senha: `Admin@1234`
 
 ## Tecnologias utilizadas
 
